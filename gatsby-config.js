@@ -25,5 +25,5 @@ module.exports = {
   },
 }
 ],
-pathPrefix: "/ibm-integration/tech-academy-dallas",
+pathPrefix: "/tech-academy-dallas",
 };
