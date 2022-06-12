@@ -1,0 +1,84 @@
+---
+title: Agile Integration Best Practices Using an IBM GitOps Automation Framework
+---
+
+
+<FeatureCard
+  title="Agile Integration Best Practices Using an IBM GitOps Automation Framework"
+  color="dark"
+  >
+
+![banner](images/automation.jpg)
+
+</FeatureCard>
+
+<AnchorLinks>
+  <AnchorLink>Lab Overview</AnchorLink>
+  <AnchorLink>Prerequisites</AnchorLink>
+  <AnchorLink>Business Context</AnchorLink>
+  <AnchorLink>Introduction</AnchorLink>
+  <AnchorLink>1 - Clone Repositories</AnchorLink>
+  <AnchorLink>2 - Explore the Environment</AnchorLink>
+  <AnchorLink>3 - Preparing the Services Layer</AnchorLink>
+  <AnchorLink>4 - Creating Instances</AnchorLink>
+  <AnchorLink>5 - Activating MQ Queue Manager</AnchorLink>
+  <AnchorLink>6 - Deploying Event Stream Customization</AnchorLink>
+  <AnchorLink>7 - App Connect Enterprise Configuration</AnchorLink>
+  <AnchorLink>8 - APIC Customizations</AnchorLink>
+  <AnchorLink>9 - Check the Demo Assets</AnchorLink>
+  <AnchorLink>Summary</AnchorLink>
+</AnchorLinks>
+
+***
+
+## Lab Overview
+
+In this tutorial, you use the IBM Cloud Pak for Integration 2021.1.1 to deploy an App Integration flow on containers and expose it as a secure rate-limited API on RedHat OpenShift 4.6.
+
+Extend your back-end integrations securely to partners and developers.
+Extending access via APIs to your back-end integrations empower your partners and developer community to create new business value, technical value, and customer experiences for your products and offerings. Spur innovations where a number of technologies are combined to create something new, for example, extending the ability apply for loan pre-approvals that can be used within apps that search for cars or real estate. To do this, you must first create the back-end integrations, which combine data from existing core systems, disparate assets, or SaaS services with the ability to send critical data between systems reliably. Second, you need to provide APIs to your back-end integrations that secure access and apply rate limits.
+In this tutorial, you learn how to deploy an app integration flow that takes data from one source and sends it to a message queue for reliable delivery. Then, you expose this integration as a rate-limited API secured by a key and secret. This integration flow is deployed quickly and easily as an independent, auto-scalable microservice running on containers. By using RedHat OpenShift as a foundation.
+
+***
+
+## Prerequisites
+
+  - You need to have your personal CP4I on ROKS environment. [Check here how to request it](https://ibm-garage-tsa.github.io/cp4i-demohub/cp4i-on-roks/)
+  - You need to have the OC CLI and you should have logged in your ROKS cluster via command line. [Check here how to do it](https://ibm-garage-tsa.github.io/cp4i-demohub/cp4i-on-roks/#access-your-roks-cluster-by-command-line)
+  - You should have an MQ Queue Manager runtime pre-created in your CP4I on ROKS environment.
+  - You need to have the IBM App Connect Enterprise Toolkit installed in your desktop. Follow the sections **Download IBM App Connect Enterprise for Developers** and **Install IBM App Connect Enterprise** from [this tutorial](https://www.ibm.com/docs/en/app-connect/11.0.0?topic=started-get-hands-experience) to install it.
+
+
+***
+
+## Business Context
+
+Implement enterprise grade messaging that is secure and reliable for any application across your backend integration architecture. Modern applications and APIs all need the ability to communicate data reliably between mission critical systems across internal/external data sources, networks, and regions. In mission critical environments your messaging infrastructure must be robust, reliable, and secure with the ability to integrate into your applications and APIs at pace and scale. In this tutorial, you create a message queue that receives order data from an API call to a retail ordering system. The red box in the diagram shows what you are creating and where it fits in the overall architecture of a mobile retail buying application.
+
+### Takeaways
+
+- Exploring multiple integration capabilities within a single platform
+- Configuring IBM MQ
+- Creating an integration flow that connects to a message queue
+- Deploy the integration flow as a container in Kubernetes
+- Checking the message using MQ Web Console
+- Configuring API in API connect
+- Sharing API in Asset Repository
+- Checking this message using Operational Dashboard (tracing)
+
+***
+
+
+  ![](images/lab1-task8.6.png)
+
+***
+
+## Summary
+
+You have successfully completed this lab. In this lab you learned how to:
+
+ - Deploy a back-end integration to containers that are readily available as a scalable web service.
+ - Secure access to the back-end integration by creating a secure, governed API using the OpenAPI definition of the integration.
+ - Use Operations Dashboard to tracing  MQ, APIC and APPC
+
+Now that you’ve made your back-end integrations ready for external distribution, your developer community is able to access the APIs via a developer portal. The developer portal is included in the platform and provides a full-featured experience to onboard and nurture your API consumers.  For more information about Cloud Pak for Integration, access [here](https://www.ibm.com/cloud/cloud-pak-for-integration).
