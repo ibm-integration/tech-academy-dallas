@@ -36,7 +36,9 @@ title: Agile Integration Best Practices Using an IBM GitOps Automation Framework
 
 Have you received requests to deliver a Multi-style Integration demo or PoC, and you don’t know how to quickly prepare this environment? You are on the right place. In this session,  you will learn how to prepare a demo/PoC environment using GitOps automation framework. This environment will include different assets, capabilities, services and applications of IBM Cloud Pak for Integration.
 
-The first main goal of this session is to provide you a complete CP4I environment with multiple demo assets to be ready to progress your sales opportunity. This first goal is achieved by reusing a <a href="" target="_blank">multi-style integratio demo assets</a>. The second goal is to provide this environment quickly and easily, by using the GitOps automation framework, more details <a href="https://production-gitops.dev/" target="_blank">here</a> about Cloud Pak Production Deployment Guides.
+The first main goal of this session is to provide you a complete CP4I environment with multiple demo assets to be ready to progress your sales opportunity. This first goal is achieved by reusing a <a href="" target="_blank">multi-style integratio demo assets</a>.
+
+The second goal is to provide this environment quickly and easily, by using the GitOps automation framework, more details <a href="https://production-gitops.dev/" target="_blank">here</a> about Cloud Pak Production Deployment Guides.
 
 This document was created for Senior Technical Specialists, and we know you are one. Because, of that, instead to have very detailled steps, we have high level directionds about what you need to do. There are some challenges that we don't explain how do it, but we are pretty sure that you can do it! But let the proctors know if you have any issue to complete the challenges.
 
@@ -51,16 +53,16 @@ In this session you will learn to:
 
 ## Prerequisites
 
-  - You need to have an OpenShift environment with GitOps operators. For this session, your proctor will provide you a pre-installed environment, with admin access (more details below). If you want to create your personal environment, check this <a href="https://www.youtube.com/watch?v=SmDE80vuP3w" target="_blank">video</a> or follow the preparation section from this <a href="https://github.com/sko-master/multi-tenancy-gitops/blob/master/doc/sko-scenario.md" target="_blank">documentation</a>.
-  - You need to have installed in your machine:
-    - <a href="https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html" target="_blank">oc CLI</a> v4.6+.
-    - github CLI
-    - Bash Shell
-    - JAVA v8+
-    - <a href="https://stedolan.github.io/jq/" target="_blank">jq CLI</a>
-  - You need to have a SalesForce account. This should have been completed as part of the <a href="https://ibm-garage-tsa.github.io/cp4i-demohub/salesdemos/carrepair-new/prepare/#setting-up-salesforce" target="_blank">Tech Academy pre-requisite work</a>.
-  - You need to have a mailtrap account. This too should have been completed as part of the <a href="https://mailtrap.io/" target="_blank">Tech Academy pre-requisite work</a>.
-  - You have access to GitHub Organization with all repositories. Your proctor will provide that for you.
+- You need to have an OpenShift environment with GitOps operators. For this session, your proctor will provide you a pre-installed environment, with admin access (more details below). If you want to create your personal environment, check this <a href="https://www.youtube.com/watch?v=SmDE80vuP3w" target="_blank">video</a> or follow the preparation section from this <a href="https://github.com/sko-master/multi-tenancy-gitops/blob/master/doc/sko-scenario.md" target="_blank">documentation</a>.
+- You need to have installed in your machine:
+  - <a href="https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html" target="_blank">oc CLI</a> v4.6+.
+  - github CLI
+  - Bash Shell
+  - JAVA v8+
+  - <a href="https://stedolan.github.io/jq/" target="_blank">jq CLI</a>
+- You need to have a SalesForce account. This should have been completed as part of the <a href="https://ibm-garage-tsa.github.io/cp4i-demohub/salesdemos/carrepair-new/prepare/#setting-up-salesforce" target="_blank">Tech Academy pre-requisite work</a>.
+- You need to have a mailtrap account. This too should have been completed as part of the <a href="https://mailtrap.io/" target="_blank">Tech Academy pre-requisite work</a>.
+- You have access to GitHub Organization with all repositories. Your proctor will provide that for you.
 
 ***
 
@@ -102,12 +104,14 @@ To demonstrate the added value capabilities provided by CP4I you will deploy an 
 
 The <a href="https://production-gitops.dev/" target="_blank">Cloud Pak Production Deployment Guides</a> document and demonstrate how to design, deploy and operate cloud-native solutions leveraging IBM Cloud Pak capabilities in Red Hat OpenShift environments. The guides focus on Production level qualities of services such as High Availability, Security and Performance including how to design, install and manage your Cluster in the popular managed and unmanaged Cloud environments as well as tackling disconnected or air-gapped environments.
 
+
 ### Production Deployment Guide objectives
 
 There are a number of objectives behind providing the Production Deployment Guides. The three main goals of the Guides are provided below:
   - Provide opinionated, validated Production topologies
   - Provide a GitOps driven automation framework
   - Enable IBMers to setup Production topologies
+
 
 ### What is GitOps?
 
