@@ -14,3 +14,7 @@
   pages:
     - title: 3 - GitOps Automation Session
       path: /gitops/
+- title: Team Environments
+  pages:
+    - title: Team Environments
+      path: /environments/
