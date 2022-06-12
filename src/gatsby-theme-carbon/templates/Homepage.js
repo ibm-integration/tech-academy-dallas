@@ -9,21 +9,15 @@ const FirstLeftText = () => <p>This page is designed to be a single point of acc
 
 const FirstRightText = () => (
   <p>
-    Are you aware that you can have a Cloud Pak for Pak_Name on ROKS only for you? Here you will see how to request your environment and explore other assets to support your sales opportunity
+    Welcome to the right place to advance your skills to plan, design, build and execute POC within Integration Portfolio.
   </p>
 );
 
-const SecondLeftText = () => <p>IBM Cloud Paks</p>;
+const SecondLeftText = () => <p>Cloud Pak for Integration</p>;
 
 const SecondRightText = () => (
   <p>
-    IBM Cloud™ Paks are enterprise-ready, containerized software solutions that give clients an open, faster and more secure way to move core business applications to any cloud.
-    <a
-      className={calloutLink}
-      href="https://www.ibm.com/cloud/paks/"
-    >
-      IBM Cloud Paks →
-    </a>
+    An AI-powered integration software solution.
   </p>
 );
 
