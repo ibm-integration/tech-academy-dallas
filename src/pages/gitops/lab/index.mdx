@@ -17,6 +17,7 @@ title: Agile Integration Best Practices Using an IBM GitOps Automation Framework
   <AnchorLink>Prerequisites</AnchorLink>
   <AnchorLink>Business Context</AnchorLink>
   <AnchorLink>Introduction</AnchorLink>
+  <AnchorLink>Lab Environment</AnchorLink>
   <AnchorLink>1 - Clone Repositories</AnchorLink>
   <AnchorLink>2 - Explore the Environment</AnchorLink>
   <AnchorLink>3 - Preparing the Services Layer</AnchorLink>
@@ -33,43 +34,132 @@ title: Agile Integration Best Practices Using an IBM GitOps Automation Framework
 
 ## Lab Overview
 
-In this tutorial, you use the IBM Cloud Pak for Integration 2021.1.1 to deploy an App Integration flow on containers and expose it as a secure rate-limited API on RedHat OpenShift 4.6.
+Have you received requests to deliver a Multi-style Integration demo or PoC, and you don’t know how to quickly prepare this environment? You are on the right place. In this session,  you will learn how to prepare a demo/PoC environment using GitOps automation framework. This environment will include different assets, capabilities, services and applications of IBM Cloud Pak for Integration.
 
-Extend your back-end integrations securely to partners and developers.
-Extending access via APIs to your back-end integrations empower your partners and developer community to create new business value, technical value, and customer experiences for your products and offerings. Spur innovations where a number of technologies are combined to create something new, for example, extending the ability apply for loan pre-approvals that can be used within apps that search for cars or real estate. To do this, you must first create the back-end integrations, which combine data from existing core systems, disparate assets, or SaaS services with the ability to send critical data between systems reliably. Second, you need to provide APIs to your back-end integrations that secure access and apply rate limits.
-In this tutorial, you learn how to deploy an app integration flow that takes data from one source and sends it to a message queue for reliable delivery. Then, you expose this integration as a rate-limited API secured by a key and secret. This integration flow is deployed quickly and easily as an independent, auto-scalable microservice running on containers. By using RedHat OpenShift as a foundation.
+The first main goal of this session is to provide you a complete CP4I environment with multiple demo assets to be ready to progress your sales opportunity. This first goal is achieved by reusing a <a href="" target="_blank">multi-style integratio demo assets</a>. The second goal is to provide this environment quickly and easily, by using the GitOps automation framework, more details <a href="https://production-gitops.dev/" target="_blank">here</a> about Cloud Pak Production Deployment Guides.
+
+This document was created for Senior Technical Specialists, and we know you are one. Because, of that, instead to have very detailled steps, we have high level directionds about what you need to do. There are some challenges that we don't explain how do it, but we are pretty sure that you can do it! But let the proctors know if you have any issue to complete the challenges.
+
+As part of the evalution process of this session, at the end, you will need to capture and upload screenshots of your final progress. In this document, you will see some references about the necessary screenshots.
+
+In this session you will learn to:
+  - Undesrtand an IBM opinionated point of view regarding a GitOps centric method to manage RHOCP infrastructure, IBM integration software and application workload code (three tier GitOps architecture).
+  - Review, develop, and extend an IBM GitOps automation repository that incapsulate key software components within the IBM Integration portfolio.
+  - Position a GitOps automation framework as a key boot-strapping and operational mechanism supporting a Client PoC activity and Client adoption.
 
 ***
 
 ## Prerequisites
 
-  - You need to have your personal CP4I on ROKS environment. [Check here how to request it](https://ibm-garage-tsa.github.io/cp4i-demohub/cp4i-on-roks/)
-  - You need to have the OC CLI and you should have logged in your ROKS cluster via command line. [Check here how to do it](https://ibm-garage-tsa.github.io/cp4i-demohub/cp4i-on-roks/#access-your-roks-cluster-by-command-line)
-  - You should have an MQ Queue Manager runtime pre-created in your CP4I on ROKS environment.
-  - You need to have the IBM App Connect Enterprise Toolkit installed in your desktop. Follow the sections **Download IBM App Connect Enterprise for Developers** and **Install IBM App Connect Enterprise** from [this tutorial](https://www.ibm.com/docs/en/app-connect/11.0.0?topic=started-get-hands-experience) to install it.
-
+  - You need to have an OpenShift environment with GitOps operators. For this session, your proctor will provide you a pre-installed environment, with admin access (more details below). If you want to create your personal environment, check this <a href="https://www.youtube.com/watch?v=SmDE80vuP3w" target="_blank">video</a> or follow the preparation section from this <a href="https://github.com/sko-master/multi-tenancy-gitops/blob/master/doc/sko-scenario.md" target="_blank">documentation</a>.
+  - You need to have installed in your machine:
+    - <a href="https://docs.openshift.com/container-platform/4.8/cli_reference/openshift_cli/getting-started-cli.html" target="_blank">oc CLI</a> v4.6+.
+    - github CLI
+    - Bash Shell
+    - JAVA v8+
+    - <a href="https://stedolan.github.io/jq/" target="_blank">jq CLI</a>
+  - You need to have a SalesForce account. This should have been completed as part of the <a href="https://ibm-garage-tsa.github.io/cp4i-demohub/salesdemos/carrepair-new/prepare/#setting-up-salesforce" target="_blank">Tech Academy pre-requisite work</a>.
+  - You need to have a mailtrap account. This too should have been completed as part of the <a href="https://mailtrap.io/" target="_blank">Tech Academy pre-requisite work</a>.
+  - You have access to GitHub Organization with all repositories. Your proctor will provide that for you.
 
 ***
 
 ## Business Context
 
-Implement enterprise grade messaging that is secure and reliable for any application across your backend integration architecture. Modern applications and APIs all need the ability to communicate data reliably between mission critical systems across internal/external data sources, networks, and regions. In mission critical environments your messaging infrastructure must be robust, reliable, and secure with the ability to integrate into your applications and APIs at pace and scale. In this tutorial, you create a message queue that receives order data from an API call to a retail ordering system. The red box in the diagram shows what you are creating and where it fits in the overall architecture of a mobile retail buying application.
+This document describes multiple use cases that highlight the multi-style integration patterns needed by an Integration Specialist to implement a digital transformation initiative that showcase the value Cloud Pak for Integration can provide.
 
-### Takeaways
+In this case a customer has a system of record that has used for many years which ws designed to work with MQ to process requirements, and now they want to extend the application to expose an API in a asecure way as part of their mobile app.
 
-- Exploring multiple integration capabilities within a single platform
-- Configuring IBM MQ
-- Creating an integration flow that connects to a message queue
-- Deploy the integration flow as a container in Kubernetes
-- Checking the message using MQ Web Console
-- Configuring API in API connect
-- Sharing API in Asset Repository
-- Checking this message using Operational Dashboard (tracing)
+But the requirement doesn't end there, they are also implementing a new CRM system as a Service and they want to keep both systems in sync without having to modify the original system of record.
+
+Additionally as part of their digital transformation initiative they want to stay closer to their clients and they want to send email notifications when the client is taking certain actions in their mobile app. To support this strategy, the enterprise architecture team wants to implement an event backbone, as part of their event driven architecture.
+
+The following diagram provides a high level view of the scenario:
+
+  ![](images/CP4I_MultiStyle_DemoScenario.png)
+
+In order to implement this demo you will need to deploy an instance of each one of the following components in your OCP Cluster:
+  - API Connect Cluster
+  - Event Streams Cluster
+  - Queue Manager
+  - App Connect Enterprise Integration Servers
+
+The following diagram provides a high level implementation view of the scenario with the core capabilities:
+
+  ![](images/CP4I_MultiStyle_HighLevelView.png)
+
+To demonstrate the added value capabilities provided by CP4I you will deploy an instance of the following components in your OCP Cluster:
+
+  - Platform UI (formerly known as Platform Navigator)
+  - Automation Foundation Assets (formerly known as Asset Repository)
+  - Operations Dashboard
 
 ***
 
+## Introduction
 
-  ![](images/lab1-task8.6.png)
+### What are the Production Deployment Guides?
+
+The <a href="https://production-gitops.dev/" target="_blank">Cloud Pak Production Deployment Guides</a> document and demonstrate how to design, deploy and operate cloud-native solutions leveraging IBM Cloud Pak capabilities in Red Hat OpenShift environments. The guides focus on Production level qualities of services such as High Availability, Security and Performance including how to design, install and manage your Cluster in the popular managed and unmanaged Cloud environments as well as tackling disconnected or air-gapped environments.
+
+### Production Deployment Guide objectives
+
+There are a number of objectives behind providing the Production Deployment Guides. The three main goals of the Guides are provided below:
+  - Provide opinionated, validated Production topologies
+  - Provide a GitOps driven automation framework
+  - Enable IBMers to setup Production topologies
+
+### What is GitOps?
+
+GitOps requires us to describe the entire system declaratively in Git where the desired system state is versioned, managed and applied by software agents.
+
+Automation is key for scale in the Cloud world and OpenShift and Cloud Paks are no different. The implementation code and artifacts provided along with these guides are based on a GitOps approach where infrastructure and everything deployed in to an OpenShift Cluster (including Cloud Paks) is described as code and is managed in the same way that application code would be.
+
+More information on the gitops structure can be read in this <a href="https://production-gitops.dev/gitops/structure/" target="_blank">page</a>.
+
+***
+
+## Lab Environment
+
+For this session you will use a ROKS 4.8 environment with 5 nodes (b3c.16x64). Following this video, you can have a personal environment for you, including GitOps operator and configuration. But for this section, your lab proctors pre-installed this cluster for you. They already installed GitOps, created an empty GitHub Organization and forked the automation repositories that you will use, for this empty organization (check the video to see the steps already completed).
+
+Because of time restrictions, the proctors already installed some core services of Cloud Pak for Integration, avoiding you to wait almost 90 minutes to complete this installation. In the previous sections, you will check what are installed in this environment. Enjoy your lab!
+
+***
+
+## 1 - Clone Repositories
+
+***
+
+## 2 - Explore the Environment
+
+***
+
+## 3 - Preparing the Services Layer
+
+***
+
+## 4 - Creating Instances
+
+***
+
+## 5 - Activating MQ Queue Manager
+
+***
+
+## 6 - Deploying Event Stream Customization
+
+***
+
+## 7 - App Connect Enterprise Configuration
+
+***
+
+## 8 - APIC Customizations
+
+***
+
+## 9 - Check the Demo Assets
 
 ***
 
