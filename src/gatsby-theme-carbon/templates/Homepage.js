@@ -3,9 +3,9 @@ import { HomepageBanner, HomepageCallout } from 'gatsby-theme-carbon';
 import HomepageTemplate from 'gatsby-theme-carbon/src/templates/Homepage';
 import { calloutLink } from './Homepage.module.scss';
 
-import Carbon from '../../images/cloud-data.jpg';
+import Carbon from '../../images/texas.png';
 
-const FirstLeftText = () => <p>This Landing is designed to be a single point of access for all Assets about SKO Technical Academy - Integration</p>;
+const FirstLeftText = () => <p>This page is designed to be a single point of access for all Assets about SKO Technical Academy - Integration</p>;
 
 const FirstRightText = () => (
   <p>
@@ -27,7 +27,7 @@ const SecondRightText = () => (
   </p>
 );
 
-const BannerText = () => <h1>IBM Cloud Pak for Integration</h1>;
+const BannerText = () => <h1>SKO Technical Academy Dallas - Integration</h1>;
 
 const customProps = {
   Banner: <HomepageBanner renderText={BannerText} image={Carbon} />,
