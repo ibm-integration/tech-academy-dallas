@@ -130,10 +130,55 @@ Because of time restrictions, the proctors already installed some core services 
 
 ## 1 - Clone Repositories
 
+1. As explained before, you already have Github repositories for your team. On the left navigator menu, check the name of your cluster and GitHub organization. As soon as you have the name, let's clone the repositories in your local machine. Use the command below to define your GIT_ORG variable.
+
+```
+export GIT_ORG={REPLACE_WITH_YOUR_GIT_ORG}
+```
+
+2. Now let's clone the repositories to your local machine.
+```
+mkdir ${GIT_ORG}
+cd ${GIT_ORG}
+git clone https://github.com/${GIT_ORG}/multi-tenancy-gitops
+git clone https://github.com/${GIT_ORG}/multi-tenancy-gitops-infra
+git clone https://github.com/${GIT_ORG}/multi-tenancy-gitops-services
+git clone https://github.com/${GIT_ORG}/multi-tenancy-gitops-apps
+```
+
+3. You are welcome to explore all the four repositories of the GitOps Automation framework.
+
+
 ***
 
 ## 2 - Explore the Environment
 
+Now that you have all the repositories locally, let's check what have been deployed.
+
+1. Let's start by exploring the GitOps Automation Framework YAML files. First, let's check the kustomization.yaml in infra layer (/multi-tenancy-gitops/0-bootstrap/single-cluster/1-infra/).
+
+`Challenge 1:` what namespaces are enabled? openshift console - check namespaces (tools ibm-common-services)
+
+2. Let's explore the kustomization.yaml in services layer (/multi-tenancy-gitops/0-bootstrap/single-cluster/2-services/)
+
+`Challenge 2:` what are the instances enabled? How can you check Platform navigator and API Connect?
+
+3. Let's check the installed operators in your Cluster Web Console (there is a URL available in the Team Environments page).
+
+`Challenge 3:` how do I see the Installed Operators in OpenShift web console?
+
+4. Now, let's open the ArgoCD UI. Don't forget to find the ArgoCD URL and admin's password. *Tip:* ArgoCD is installed in the openshift-gitops namespace, just look for openshift-gitops-cntk.
+
+`Challenge 4:` Where do I see the ArgoCD URL? Where do I get the ArgoCD admin password?
+
+5. In ArgoCD UI check all applications available. Check the application's healthy status.
+
+6. Let's open the Platform navigator. *Tip:* All CP4I services are installed in the tools namespace.
+
+`Challenge 5:` Where do I see the Platform navigator URL? Where do I get the CP4i admin's password?
+
+`Challenge 6:` What are the Integration's instances available?
+ 
 ***
 
 ## 3 - Prepare the Subscription
