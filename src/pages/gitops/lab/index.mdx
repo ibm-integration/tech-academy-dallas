@@ -386,6 +386,55 @@ git push origin
 
 ## 8 - Customize APIC
 
+Now, let's create the Provider Organization and Publish the API in APIC.
+
+1. Go to the folder **multi-tenancy-gitops-apps/sko-sample/apic-cust**.
+
+2. Now let's configure APIC to submit emails when necessary (e.g.: Portal Users registration). Run the script to generate the APIC mail secret using Mailtrap.
+   - MAILTRAP_USER is *[Mailtrap SMTP User]*
+   - MAILTRAP_PWD is *[Mailtrap SMTP Password]*
+
+```
+MAILTRAP_USER=<user> MAILTRAP_PWD=<pwd> ./apic-user-mail-secret.sh
+```
+
+3. Check that you have a Secret YAML file in your folder.
+
+4. Edit **multi-tenancy-gitops/0-bootstrap/single-cluster/3-apps/kustomization.yaml**.
+
+5. Uncomment the line below.
+```
+- argocd/sko-sample/apic-cust.yaml
+
+```
+
+6. In the multi-tenancy-gitops folder: Add, Commit and Push the changes to multi-tenancy-gitops repository.
+```
+git add .
+git commit -m "apic customization"
+git push origin
+```
+
+7. Back to the argoCD console, refresh the **03-Application** application. Maybe you need to wait few minutes to make sure that all the status are Sync and Healthy, before progressing.
+
+8. Open the **apic-cust** application. Check if the apic-setup job is successful (look at the pod's logs).
+
+9. Great, now you are ready to publish your API. Back to the OpenShift Console, open the **Pods** page (Workloads > Pods), on the **tools** namespace, filter by the word **publish**.
+
+10. Open the pod, and go to the **Terminal** tab.
+
+11. In the Terminal session, run **./apic-publish-api.sh**.
+
+12. Feel free to accept or not the limited usage tracking.
+
+13. You need to authenticate in APIC to publish the API. Let's do it! Open the URL provided in a different browser session.
+
+14. If necessary log in APIC with your admin and password.
+
+15. Copy the code to the Terminal tab to continue the publish process.
+
+16. Great, your API is published successfully. 
+
 ***
 
 ## 9 - Check the Demo Assets
