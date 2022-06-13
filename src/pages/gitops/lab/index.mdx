@@ -330,6 +330,58 @@ git push origin
 
 ## 7 - Configure ACE
 
+Now, let's work with Application Connect Enterprise. In this part, you are configuring artifacts, secrets and certificates.
+
+1. Open the **multi-tenancy-gitops-apps/sko-sample/ace-00-config** folder.
+
+2. Execute the commands below to generate the configuration YAML files.
+   **Note:** SF_USER is *Email addess used to log into Salesforce*
+             SF_PWD is *<Password used to log in><token received in email>*
+             SF_CLIENT_ID is *<Consumer Key>*
+             SF_CLIENT_SECRET is *<Consumer Secret>*
+             MAILTRAP_USER is *Mailtrap SMTP User*
+             MAILTRAP_PWD is *Mailtrap SMTP Password*
+
+```
+./06-ace-config-barauth-github.sh
+./07-ace-config-policy-mq.sh
+SF_USER=<my-sf-user> SF_PWD=<my-sf-pwd> SF_CLIENT_ID=<my-sf-client-id> SF_CLIENT_SECRET=<my-sf-client-secret> SF_LOGIN_URL="https://login.salesforce.com" ./08-ace-config-accounts-sf.sh
+./10-ace-config-policy-es-scram.sh
+./11-ace-config-setdbparms-es-scram.sh
+./12-ace-config-truststore-es.sh
+./13-ace-config-policy-udp.sh
+./14-ace-config-policy-email.sh
+MAILTRAP_USER=<user> MAILTRAP_PWD=<pwd> ./15-ace-config-setdbparms-email.sh
+```
+
+3. Verify that there are 9 YAML files generated in the *ace-00-config* folder.
+
+4. Edit **multi-tenancy-gitops-apps/sko-sample/ace-00-config/kustomization.yaml** file.
+
+5. Uncomment the lines below (all the content).
+```
+- ace-config-accounts-designer.yaml
+
+- ace-config-policy-es-scram.yaml
+- ace-config-setdbparms-es-scram.yaml
+- ace-config-truststore.yaml
+
+- ace-config-policy-udp.yaml
+- ace-config-policy-email.yaml
+- ace-config-setdbparms-email.yaml
+```
+
+6. In the multi-tenancy-gitops-apps folder: Add, Commit and Push the changes to multi-tenancy-gitops-apps repository.
+```
+git add .
+git commit -m "ace config"
+git push origin
+```
+
+7. Back to the argoCD console, refresh the **03-Application** application. Maybe you need to wait few minutes to make sure that all the status are Sync and Healthy, before progressing.
+
+8. Back to Platform Navigator, open **App Connect Dashboard** (Run > Integration) and check the Integration servers. 
+
 ***
 
 ## 8 - Customize APIC
