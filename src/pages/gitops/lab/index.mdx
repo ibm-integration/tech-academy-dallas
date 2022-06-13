@@ -44,10 +44,10 @@ This document was created for Senior Technical Specialists, and we know you are 
 
 As part of the evalution process of this session, at the end, you will need to capture and upload screenshots of your final progress. In this document, you will see some references about the necessary screenshots.
 
-In this session you will learn to:
-  - understand an IBM opinionated point of view regarding a GitOps centric method to manage RHOCP infrastructure, IBM integration software and application workload code (three tier GitOps architecture).
-  - Review, develop, and extend an IBM GitOps automation repository that incapsulate key software components within the IBM Integration portfolio.
-  - Position a GitOps automation framework as a key boot-strapping and operational mechanism supporting a Client PoC activity and Client adoption.
+In this session you will learn:
+  - the IBM opinionated point of view regarding a GitOps centric method to manage RHOCP infrastructure, IBM integration software and application workload code (three tier GitOps architecture).
+  - how to develop, review, and extend an IBM GitOps automation repository that incapsulate key software components within the IBM Integration portfolio.
+  - how to position a GitOps automation framework as a key boot-strapping and operational mechanism supporting a Client PoC activity and Client adoption.
 
 ***
 
@@ -433,20 +433,59 @@ git push origin
 
 15. Copy the code to the Terminal tab to continue the publish process.
 
-16. Great, your API is published successfully. 
+16. Great, your API is published successfully.
 
 ***
 
 ## 9 - Check the Demo Assets
 
+Great, in this part of the lab, you will check the Demo environment and assets. On the other hand, you will collect all the evidences to prove that you were able to complete the lab (check the 3 screenshots notes).
+
+1. Back to ArgoCD page, go to the main page, and check all the 35 applications are healthy.
+   ``SCREENSHOT 1 - ``Take a screenshot of the main ArgoCD page showing 35 applications healthy. Please include your browser adddres bar showing your cluster URL.
+
+2. Now, let's test your demo. Open the Platform Navigator page and go to the **Integration Instances** view.
+
+3. Here you should see all the integrations as Ready.
+   ``SCREENSHOT 2 - ``Take a screenshot of the Integration Instances page with all instances as ready. Please include your browser adddres bar showing your cluster URL.
+
+4. Then, open the **API Manager** (Run > API).
+
+5. Click **Develop APIs and products**. And select **JGRMQAPI**.
+
+6. Put your API **online**.
+
+7. Now, let's try it! Open the **Explorer** tab.
+
+8. Click on **POST /contacts**.
+
+9. Open **Try it**.
+
+10. On the Body section, click **Generate** to create a request body sample.
+
+11. Click **Send**.
+
+12. If you received 200 response, your request has been processed (success).
+    *Note:* if you receive a CORS issue. Open the URL, accept the risks and try again.
+
+13. Now, let's check the **Integration Trace** page (Operate > Integration Trace).
+
+14. Close the *What's New* dialog and accept the license.
+
+15. Open the **Traces** view.
+
+16. Select the entry that has all APIC ACE and MQ components in the services column.
+
+17. Great, here you should have the integrated trace graph with 10 nodes, including all the demo components.
+   ``SCREENSHOT 3 - ``Take a screenshot of the Integrated Tracepage showing all the demo components (10 nodes). Please include your browser adddres bar showing your cluster URL.
+
 ***
 
 ## Summary
 
-You have successfully completed this lab. In this lab you learned how to:
+You have successfully completed this lab. In this lab you learned:
+  - the IBM opinionated point of view regarding a GitOps centric method to manage RHOCP infrastructure, IBM integration software and application workload code (three tier GitOps architecture).
+  - how to develop, review, and extend an IBM GitOps automation repository that incapsulate key software components within the IBM Integration portfolio.
+  - how to position a GitOps automation framework as a key boot-strapping and operational mechanism supporting a Client PoC activity and Client adoption.
 
- - Deploy a back-end integration to containers that are readily available as a scalable web service.
- - Secure access to the back-end integration by creating a secure, governed API using the OpenAPI definition of the integration.
- - Use Operations Dashboard to tracing  MQ, APIC and APPC
-
-Now that you’ve made your back-end integrations ready for external distribution, your developer community is able to access the APIs via a developer portal. The developer portal is included in the platform and provides a full-featured experience to onboard and nurture your API consumers.  For more information about Cloud Pak for Integration, access [here](https://www.ibm.com/cloud/cloud-pak-for-integration).
+Check <a href="https://youtu.be/oTrtd9eKU8E" target="blank">this video</a> later, if you want to learn how to deliver a demo using this demo environment.
