@@ -336,13 +336,13 @@ Now, let's work with Application Connect Enterprise. In this part, you are confi
 
 2. Execute the commands below to generate the configuration YAML files.
    **Note:** SF_USER is *Email addess used to log into Salesforce*
-             SF_PWD is *<Password used to log in><token received in email>*
-             SF_CLIENT_ID is *<Consumer Key>*
-             SF_CLIENT_SECRET is *<Consumer Secret>*
+             SF_PWD is *\<Password used to log in\>\<token received in email\>*
+             SF_CLIENT_ID is *\<Consumer Key\>*
+             SF_CLIENT_SECRET is *\<Consumer Secret\>*
              MAILTRAP_USER is *Mailtrap SMTP User*
              MAILTRAP_PWD is *Mailtrap SMTP Password*
 
-```bash
+```
 ./06-ace-config-barauth-github.sh
 ./07-ace-config-policy-mq.sh
 SF_USER=<my-sf-user> SF_PWD=<my-sf-pwd> SF_CLIENT_ID=<my-sf-client-id> SF_CLIENT_SECRET=<my-sf-client-secret> SF_LOGIN_URL="https://login.salesforce.com" ./08-ace-config-accounts-sf.sh
