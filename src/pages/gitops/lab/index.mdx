@@ -215,9 +215,65 @@ git push origin
 
 ## 4 - Deploy ACE and ES instances
 
+Now, let's create App Connect Enterprise and Event Streams instances using the GitOps Automation Framework.
+
+1. Edit **multi-tenancy-gitops/0-bootstrap/single-cluster/2-services/kustomization.yaml**.
+
+2. Uncomment the lines below.
+```
+- argocd/instances/es-demo.yaml
+- argocd/instances/ace-infra.yaml
+```
+
+3. In the multi-tenancy-gitops folder: Add, Commit and Push the changes to multi-tenancy-gitops repository.
+```
+git add .
+git commit -m "deploying ace and es"
+git push origin
+```
+
+4. Back to the argoCD console, refresh the **02-Services** application. Maybe you need to wait few minutes to make sure that all the status are Sync and Healthy, before progressing.
+
+   `Challenge 4.1:` What are the new applications available in ArgoCD?
+
+5. Back to the OpenShift Web console, check if there are new operators available.
+
+    `Challenge 4.2:` What are the new operators?
+
+6. Back to CP4i Platform Navigator, check if the new instances are available and ready.
+
+    `Challenge 4.3:` How to check if the instances are available in Platform Navigator?
+
 ***
 
 ## 5 - Activate MQ Queue Manager
+
+Now, let's start the application layer. First we need to create the MQ Queue Manager.
+
+1. Edit **multi-tenancy-gitops/0-bootstrap/single-cluster/3-apps/kustomization.yaml**.
+
+2. Uncomment the line below.
+```
+- argocd/sko-sample/mqmgr.yaml
+
+```
+
+3. In the multi-tenancy-gitops folder: Add, Commit and Push the changes to multi-tenancy-gitops repository.
+```
+git add .
+git commit -m "mq queue manager"
+git push origin
+```
+
+4. Back to the argoCD console, refresh the **03-Application** application. Maybe you need to wait few minutes to make sure that all the status are Sync and Healthy, before progressing.
+
+   `Challenge 5.1:` What are the new applications available in ArgoCD?
+
+5. On the OpenShift Web Console page, check the **qmgr-demo** are running.
+
+6. On the CP4i Platform Navigator page, check the Queue Managers.
+
+   `Challenge 5.2:` How many Queue Managers are available? How do you check them?   
 
 ***
 
