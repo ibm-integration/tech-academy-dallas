@@ -23,7 +23,7 @@ title: Agile Integration Best Practices Using an IBM GitOps Automation Framework
   <AnchorLink>3 - Prepare the Subscription</AnchorLink>
   <AnchorLink>4 - Deploy ACE and ES instances</AnchorLink>
   <AnchorLink>5 - Activate MQ Queue Manager</AnchorLink>
-  <AnchorLink>6 - Customize Event Stream</AnchorLink>
+  <AnchorLink>6 - Customize Event Streams</AnchorLink>
   <AnchorLink>7 - Configure ACE</AnchorLink>
   <AnchorLink>8 - Customize APIC</AnchorLink>
   <AnchorLink>9 - Check the Demo Assets</AnchorLink>
@@ -167,7 +167,7 @@ Now that you have all the repositories locally, let's check what have been deplo
 
    `Challenge 2.3:` how do I see the Installed Operators in OpenShift web console?
 
-4. Now, let's open the ArgoCD UI. Don't forget to find the ArgoCD URL and admin's password. *Tip:* ArgoCD is installed in the openshift-gitops namespace, just look for openshift-gitops-cntk.
+4. Now, let's open the ArgoCD UI. Don't forget to find the ArgoCD URL and admin's password. *Tip:* ArgoCD is installed in the openshift-gitops namespace, just look for openshift-gitops-cntk in Secrets and in Routes.
 
    `Challenge 2.4:` Where do I see the ArgoCD URL? Where do I get the ArgoCD admin password?
 
@@ -273,11 +273,58 @@ git push origin
 
 6. On the CP4i Platform Navigator page, check the Queue Managers.
 
-   `Challenge 5.2:` How many Queue Managers are available? How do you check them?   
+   `Challenge 5.2:` How many Queue Managers are available? How do you check them?
 
 ***
 
-## 6 - Customize Event Stream
+## 6 - Customize Event Streams
+
+Now, let's create the Event Streams resources for our Multi-Style demo.
+
+1. Edit **multi-tenancy-gitops/0-bootstrap/single-cluster/3-apps/kustomization.yaml**.
+
+2. Uncomment the line below.
+```
+- argocd/sko-sample/eventstream.yaml
+
+```
+
+3. In the multi-tenancy-gitops folder: Add, Commit and Push the changes to multi-tenancy-gitops repository.
+```
+git add .
+git commit -m "customize ES"
+git push origin
+```
+
+4. Back to the argoCD console, refresh the **03-Application** application. Maybe you need to wait few minutes to make sure that all the status are Sync and Healthy, before progressing.
+
+5. Open the **eventstream** application and check the log of **es-demo-setup-job-???** pod.
+
+6. You should see a failure that statefulsets.apps is forbidden. Let's fix it! Edit **multi-tenancy-gitops-apps/sko-sample/eventstream/es-demo-setup-job-sa-role.yaml**.
+
+7. In the Rules section, create a new rule with the content below and save the new YAML file.
+```
+- apiGroups: ["apps"]
+  resources: ["statefulsets"]
+  verbs: ["get", "watch", "list"]
+```
+
+8. In the multi-tenancy-gitops-apps folder: Add, Commit and Push the changes to multi-tenancy-gitops-apps repository.
+```
+git add .
+git commit -m "apps statefulsets permission"
+git push origin
+```
+
+9. Back to the argoCD console, refresh the **eventstream** application. Maybe you need to wait few minutes to make sure that all the status are Sync and Healthy.
+
+10. Now you need to delete **es-demo-setup-job** to re-run the pod.
+
+11. Now let's check the log of **es-demo-setup-job-???** pod again.
+
+12. Wow, another failure!! Now with route. Follow the same approach of the previous error, but now include a rule to resources **routes** in the apiGroups **route.openshift.io**.
+
+13. Repeat steps 8 to 11, to deploy the changes.
 
 ***
 
