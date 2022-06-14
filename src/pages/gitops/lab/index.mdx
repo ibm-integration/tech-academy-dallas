@@ -18,6 +18,7 @@ title: Agile Integration Best Practices Using an IBM GitOps Automation Framework
   <AnchorLink>Business Context</AnchorLink>
   <AnchorLink>Automation Framework Introduction</AnchorLink>
   <AnchorLink>Lab Environment</AnchorLink>
+  <AnchorLink>0 - Preparation</AnchorLink>
   <AnchorLink>1 - Clone Repositories</AnchorLink>
   <AnchorLink>2 - Explore the Environment</AnchorLink>
   <AnchorLink>3 - Prepare the Subscription</AnchorLink>
@@ -124,7 +125,43 @@ More information on the gitops structure can be read in this <a href="https://pr
 
 For this session you will use a ROKS 4.8 environment with 5 nodes (b3c.16x64). Following this video, you can have a personal environment for you, including GitOps operator and configuration. But for this section, your lab proctors pre-installed this cluster for you. They already installed GitOps, created an empty GitHub Organization and forked the automation repositories that you will use, for this empty organization (check the video to see the steps already completed).
 
-Because of time restrictions, the proctors already installed some core services of Cloud Pak for Integration, avoiding you to wait almost 90 minutes to complete this installation. In the previous sections, you will check what are installed in this environment. Enjoy your lab!
+Because of time restrictions, the proctors already installed some core services of Cloud Pak for Integration, avoiding you to wait almost 90 minutes to complete this installation. In the previous sections, you will check what are installed in this environment.
+
+***
+
+## 0 - Preparation
+
+In this section you will do some initial steps to prepare your environment for the lab, including accept the Account Invitation in IBM Cloud, access your cluster web console and by command line interface. Let’s start it!
+
+1. Log in IBM Cloud.
+
+2. Open the **Notifications** page (click on top right ring bell icon).
+
+   ![](images/gitops-0-1.png)
+
+3. On the Notifications page, you should have an **Account** notification informing you that “You are invited to join an account in IBM Cloud”. Select this notification and click the **Join now** link.
+
+   ![](images/gitops-0-2.png)
+
+4. Follow the steps to accept the invitation.
+
+5. Now back to the IBM Cloud dashboard, change your IBM Cloud account to **2543884 - itztsglenablement05**.
+
+   ![](images/gitops-0-3.png)
+
+6. Now you have two possibilities, you can open the Team Environment page on the left of this menu and click to open your Cluster page (it is easy, isn’t?) or you can open the Openshift page on the IBM Cloud menu and look for your cluster in the *Clusters’ list*.
+
+7. On your cluster’s page, click **OpenShift web console**.
+
+8. Great, you are almost ready for the lab. Last but not least important, let’s copy login command to access the cluster by CLI. On the top right, click your **username** and select **Copy login command**.
+
+   ![](images/gitops-0-4.png)
+
+9. Click **Display Token**.
+
+10. Copy the **Login with this token** command  and paste on a terminal window.
+
+    That is it! Now you are ready for the lab. Take a breath and enjoy your lab!
 
 ***
 
