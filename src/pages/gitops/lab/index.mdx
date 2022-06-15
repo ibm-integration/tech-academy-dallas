@@ -410,16 +410,29 @@ MAILTRAP_USER=<user> MAILTRAP_PWD=<pwd> ./15-ace-config-setdbparms-email.sh
 - ace-config-setdbparms-email.yaml
 ```
 
-6. In the multi-tenancy-gitops-apps folder: Add, Commit and Push the changes to multi-tenancy-gitops-apps repository.
+6. Edit **multi-tenancy-gitops/0-bootstrap/single-cluster/3-apps/kustomization.yaml** file.
+
+7. Uncomment the lines below (all the content).
+```
+- argocd/sko-sample/ace-00-config.yaml
+- argocd/sko-sample/ace-backend.yaml
+- argocd/sko-sample/ace-evnt2mail.yaml
+- argocd/sko-sample/ace-fwdmqevnt.yaml
+- argocd/sko-sample/ace-mqapidflt.yaml
+- argocd/sko-sample/ace-mqapiprem.yaml
+- argocd/sko-sample/ace-sflead.yaml
+```
+
+8. In the multi-tenancy-gitops-apps folder: Add, Commit and Push the changes to multi-tenancy-gitops-apps repository.
 ```
 git add .
 git commit -m "ace config"
 git push origin
 ```
 
-7. Back to the argoCD console, refresh the **03-Application** application. Maybe you need to wait few minutes to make sure that all the status are Sync and Healthy, before progressing.
+9. Back to the argoCD console, refresh the **03-Application** application. Maybe you need to wait few minutes to make sure that all the status are Sync and Healthy, before progressing.
 
-8. Back to Platform Navigator, open **App Connect Dashboard** (Run > Integration) and check the Integration servers.
+10. Back to Platform Navigator, open **App Connect Dashboard** (Run > Integration) and check the Integration servers.
 
 ***
 
