@@ -206,17 +206,17 @@ Now that you have all the repositories locally, let's check what have been deplo
 
    `Challenge 2.3:` how do I see the Installed Operators in OpenShift web console?
 
-4. Now, let's open the ArgoCD UI. Don't forget to find the ArgoCD URL and admin's password. *Tip:* ArgoCD is installed in the openshift-gitops namespace, just look for openshift-gitops-cntk in Secrets and in Routes.
+4. Now, let's open the ArgoCD UI. Don't forget to find the ArgoCD URL and admin's password. *Tip:* ArgoCD is installed in the openshift-gitops namespace, just look for an opaque (type) *openshift-gitops-cntk* in Secrets and an *openshift-gitops-cntk* Routes.
 
    `Challenge 2.4:` Where do I see the ArgoCD URL? Where do I get the ArgoCD admin password?
 
 5. In ArgoCD UI check all applications available. Check the application's healthy status.
 
-6. Let's open the Platform navigator. *Tip:* All CP4I services are installed in the tools namespace.
+6. Let's open the Platform navigator. *Tip:* All CP4I services are installed in the tools namespace. And secret name is *ibm-iam-bindinfo-platform-auth-idp-credentials*.
 
    `Challenge 2.5:` Where do I see the Platform navigator URL? How do I get the CP4i admin's password?
 
-7. Check the Integration's Instances available.
+7. Check what the Integration's Instances are available.
 
    `Challenge 2.6:` What are the instances available?
 
@@ -361,7 +361,7 @@ git push origin
 
 11. Now let's check the log of **es-demo-setup-job-???** pod again.
 
-12. Wow, another failure!! Now with route. Follow the same approach of the previous error, but now include a rule to resources **routes** in the apiGroups **route.openshift.io**.
+12. Wow, another failure!! Now with route. Follow the same approach of the previous error, but now include a rule to resources **routes** in the apiGroups **route.openshift.io** and repeat the same verbs of the previous rule.
 
 13. Repeat steps 8 to 11, to deploy the changes.
 
@@ -452,40 +452,47 @@ MAILTRAP_USER=<user> MAILTRAP_PWD=<pwd> ./apic-user-mail-secret.sh
 
 3. Check that you have a Secret YAML file in your folder.
 
-4. Edit **multi-tenancy-gitops/0-bootstrap/single-cluster/3-apps/kustomization.yaml**.
+4. In the multi-tenancy-gitops-apps folder: Add, Commit and Push the changes to multi-tenancy-gitops repository.
+```
+git add .
+git commit -m "apic user mail secret"
+git push origin
+```
 
-5. Uncomment the line below.
+5. Edit **multi-tenancy-gitops/0-bootstrap/single-cluster/3-apps/kustomization.yaml**.
+
+6. Uncomment the line below.
 ```
 - argocd/sko-sample/apic-cust.yaml
 
 ```
 
-6. In the multi-tenancy-gitops folder: Add, Commit and Push the changes to multi-tenancy-gitops repository.
+7. In the multi-tenancy-gitops folder: Add, Commit and Push the changes to multi-tenancy-gitops repository.
 ```
 git add .
 git commit -m "apic customization"
 git push origin
 ```
 
-7. Back to the argoCD console, refresh the **03-Application** application. Maybe you need to wait few minutes to make sure that all the status are Sync and Healthy, before progressing.
+8. Back to the argoCD console, refresh the **03-Application** application. Maybe you need to wait few minutes to make sure that all the status are Sync and Healthy, before progressing.
 
-8. Open the **apic-cust** application. Check if the apic-setup job is successful (look at the pod's logs).
+9. Open the **apic-cust** application. Check if the apic-setup job is successful (look at the pod's logs).
 
-9. Great, now you are ready to publish your API. Back to the OpenShift Console, open the **Pods** page (Workloads > Pods), on the **tools** namespace, filter by the word **publish**.
+10. Great, now you are ready to publish your API. Back to the OpenShift Console, open the **Pods** page (Workloads > Pods), on the **tools** namespace, filter by the word **publish**.
 
-10. Open the pod, and go to the **Terminal** tab.
+11. Open the pod, and go to the **Terminal** tab.
 
-11. In the Terminal session, run **./apic-publish-api.sh**.
+12. In the Terminal session, run **./apic-publish-api.sh**.
 
-12. Feel free to accept or not the limited usage tracking.
+13. Feel free to accept or not the limited usage tracking.
 
-13. You need to authenticate in APIC to publish the API. Let's do it! Open the URL provided in a different browser session.
+14. You need to authenticate in APIC to publish the API. Let's do it! Open the URL provided in a different browser session.
 
-14. If necessary log in APIC with your admin and password.
+15. If necessary log in APIC with your admin and password.
 
-15. Copy the code to the Terminal tab to continue the publish process.
+16. Copy the code to the Terminal tab to continue the publish process.
 
-16. Great, your API is published successfully.
+17. Great, your API is published successfully.
 
 ***
 
